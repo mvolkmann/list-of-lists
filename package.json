@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "dev": "bun run --hot src/index.tsx"
+    "dev": "bun run --hot src/server.tsx",
+    "reinstall": "rm -rf node_modules bun.lockb && bun install"
   },
   "dependencies": {
     "hono": "^3.12.8"

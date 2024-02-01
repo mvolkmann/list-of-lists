@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>List Of Lists</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="alpine.min.js"></script>
+    <script defer src="htmx.min.js"></script>
+    <script defer src="setup.js"></script>
+  </head>
+  <body>
+    <h1>List Of Lists (LOL)</h1>
+
+    <div class="button-row" hx-get="/list" hx-trigger="load"></div>
+  </body>
+</html>

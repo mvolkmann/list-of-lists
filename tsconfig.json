@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
+    "esModuleInterop": true,
     "strict": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx"
+    "jsxImportSource": "hono/jsx",
+    "types": [
+      "bun-types" // add Bun global
+    ]
   }
 }
