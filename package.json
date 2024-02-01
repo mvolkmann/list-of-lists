@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "bun run --hot src/server.tsx",
+    "dev": "bun run --watch src/server.tsx",
     "reinstall": "rm -rf node_modules bun.lockb && bun install"
   },
   "dependencies": {

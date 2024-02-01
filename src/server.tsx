@@ -8,7 +8,7 @@ import List from './List';
 
 console.log('Server starting...');
 
-//----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // Browser reload support
 //-----------------------------------------------------------------------------
 
@@ -39,15 +39,34 @@ function makeLists() {
 }
 
 const lists = makeLists();
+let selectedList = '';
+
+type ListButtonProps = {name: string; oob?: boolean};
+function ListButton({name, oob = false}: ListButtonProps) {
+  const classes = 'list-btn' + (name === selectedList ? ' selected' : '');
+  const attrs: {[key: string]: any} = {};
+  if (oob) attrs['hx-swap-oob'] = true;
+  return (
+    <button
+      class={classes}
+      hx-get={`/list/${name}`}
+      hx-target="#items"
+      id={name}
+      {...attrs}
+    >
+      {name}
+    </button>
+  );
+}
 
 app.get('/list', (c: Context) => {
-  const keys = Array.from(lists.keys()).sort();
+  const names = Array.from(lists.keys()).sort();
   const jsx = (
-    <ul>
-      {keys.map((name: string) => (
-        <button>{name}</button>
+    <>
+      {names.map((name: string) => (
+        <ListButton name={name} />
       ))}
-    </ul>
+    </>
   );
 
   return c.html(jsx);
@@ -55,15 +74,20 @@ app.get('/list', (c: Context) => {
 
 app.get('/list/:name', (c: Context) => {
   const name = c.req.param('name');
+  const previousButton = selectedList ? (
+    <ListButton name={selectedList} oob />
+  ) : null;
+  const thisButton = <ListButton name={name} oob />;
+  selectedList = name;
+
   const list = lists.get(name);
-  if (!list) return c.html('');
 
   const jsx = (
-    <ul>
-      {list.items.map((item: Item) => (
-        <li>{item.text}</li>
-      ))}
-    </ul>
+    <>
+      {list && list.items.map((item: Item) => <li>{item.text}</li>)}
+      {previousButton}
+      {thisButton}
+    </>
   );
 
   return c.html(jsx);

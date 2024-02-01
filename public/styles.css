@@ -10,10 +10,14 @@ button {
   padding: 0.5rem;
 }
 
+button.selected {
+  background-color: yellow;
+}
+
 .button-row {
   display: flex;
+  justify-content: start;
   gap: 1rem;
-  /* border: 1px dashed red; */
 }
 
 form {
@@ -39,7 +43,6 @@ input {
 
 h1 {
   color: orange;
-  margin-bottom: 0;
   margin-top: 0;
 }
 
@@ -47,6 +50,10 @@ h1 {
   height: 1.5rem;
   margin-top: 0.5rem;
   width: 1.5rem;
+}
+
+#items {
+  list-style-type: none;
 }
 
 label {
