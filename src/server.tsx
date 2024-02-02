@@ -76,7 +76,7 @@ app.get('/list', (c: Context) => {
 });
 
 app.get('/list/:name', (c: Context) => {
-  Bun.sleepSync(1000); // simulate long-running query
+  Bun.sleepSync(500); // simulate long-running query
 
   const name = c.req.param('name');
   const previousButton = selectedList ? (

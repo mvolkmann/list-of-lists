@@ -50,4 +50,5 @@ const handleDragOver = e => {
 
 sortableList.addEventListener('dragover', handleDragOver);
 
+// TODO: Is this needed?
 sortableList.addEventListener('dragenter', e => e.preventDefault());
