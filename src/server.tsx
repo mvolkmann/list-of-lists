@@ -62,6 +62,13 @@ function ListButton({name, oob = false}: ListButtonProps) {
   );
 }
 
+app.delete('/list/:name/:index', (c: Context) => {
+  const name = c.req.param('name');
+  const index = c.req.param('index');
+  console.log('server.tsx: deleting index', index, 'in list', name);
+  return c.text('');
+});
+
 app.get('/list', (c: Context) => {
   const names = Array.from(lists.keys()).sort();
   const jsx = (
@@ -76,7 +83,7 @@ app.get('/list', (c: Context) => {
 });
 
 app.get('/list/:name', (c: Context) => {
-  Bun.sleepSync(500); // simulate long-running query
+  // Bun.sleepSync(500); // simulate long-running query
 
   const name = c.req.param('name');
   const previousButton = selectedList ? (
@@ -90,9 +97,16 @@ app.get('/list/:name', (c: Context) => {
   const jsx = (
     <>
       {list &&
-        list.items.map((item: Item) => (
+        list.items.map((item: Item, index: number) => (
           <li class="item" draggable>
             ☰ {item.text}
+            <button
+              class="delete-btn"
+              hx-delete={`/list/${name}/${index}`}
+              hx-swap="none"
+            >
+              ✖
+            </button>
           </li>
         ))}
       {previousButton}

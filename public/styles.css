@@ -20,6 +20,11 @@ button.selected {
   gap: 1rem;
 }
 
+.delete-btn {
+  background-color: transparent;
+  color: white;
+}
+
 form {
   display: inline-flex;
   flex-direction: column;
@@ -53,6 +58,9 @@ h1 {
 }
 
 .item {
+  display: flex;
+  gap: 1rem;
+
   color: white;
   cursor: move;
   font-size: 2rem;
