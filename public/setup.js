@@ -9,6 +9,7 @@ ws.addEventListener('close', event => {
   }, 500); // gives the server time to restart
 });
 
+// See https://www.codingnepalweb.com/drag-and-drop-sortable-list-html-javascript/.
 // TODO: The drag and drop code below only works on devices with a mouse.
 // TODO: To enable touch functionality, add touch event listeners.
 
