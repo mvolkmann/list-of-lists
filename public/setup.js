@@ -1,3 +1,4 @@
+// This supports automatically refreshing the browser when the server restarts.
 const ws = new WebSocket('ws://localhost:3001'); // match port above
 ws.addEventListener('close', event => {
   console.log('setup.js: event =', event);
@@ -8,22 +9,22 @@ ws.addEventListener('close', event => {
   }, 500); // gives the server time to restart
 });
 
-// TODO: This only works on devices with a mouse.
+// TODO: The drag and drop code below only works on devices with a mouse.
 // TODO: To enable touch functionality, add touch event listeners.
 
 const sortableList = document.querySelector('.sortable-list');
 
-// TODO: Call this every time the list changes!
+// The hx-on attribute on the body element in index.html
+// calls this every time the list changes.
 function listChanged() {
   setTimeout(() => {
     const items = sortableList.querySelectorAll('.item');
     items.forEach(item => {
+      // Add the dragging class to the item after a delay.
       item.addEventListener('dragstart', () => {
-        console.log('setup.js dragstart: item =', item);
-        // Adding dragging class to item after a delay
         setTimeout(() => item.classList.add('dragging'), 0);
       });
-      // Removing dragging class from item on dragend event
+      // Remove the dragging class from the item on dragend.
       item.addEventListener('dragend', () => item.classList.remove('dragging'));
     });
   }, 0);

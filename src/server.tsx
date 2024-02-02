@@ -52,6 +52,7 @@ function ListButton({name, oob = false}: ListButtonProps) {
     <button
       class={classes}
       hx-get={`/list/${name}`}
+      hx-indicator=".htmx-indicator"
       hx-target=".sortable-list"
       id={name}
       {...attrs}
@@ -75,6 +76,8 @@ app.get('/list', (c: Context) => {
 });
 
 app.get('/list/:name', (c: Context) => {
+  Bun.sleepSync(1000); // simulate long-running query
+
   const name = c.req.param('name');
   const previousButton = selectedList ? (
     <ListButton name={selectedList} oob />
@@ -97,6 +100,7 @@ app.get('/list/:name', (c: Context) => {
     </>
   );
 
+  // This triggers an event in the client.
   c.header('HX-Trigger', 'list-change');
   return c.html(jsx);
 });
