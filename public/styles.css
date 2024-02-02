@@ -52,12 +52,22 @@ h1 {
   width: 1.5rem;
 }
 
-#items {
-  list-style-type: none;
+.item {
+  color: white;
+  cursor: move;
+  font-size: 2rem;
+}
+.item.dragging {
+  opacity: 0.6;
 }
 
 label {
   font-weight: bold;
+}
+
+.sortable-list {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 table {

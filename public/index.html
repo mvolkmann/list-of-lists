@@ -9,11 +9,11 @@
     <script defer src="htmx.min.js"></script>
     <script defer src="setup.js"></script>
   </head>
-  <body>
+  <body hx-on:list-change="listChanged()">
     <h1>List Of Lists (LOL)</h1>
 
     <div class="button-row" hx-get="/list" hx-trigger="load"></div>
 
-    <ul id="items"></ul>
+    <ul class="sortable-list"></ul>
   </body>
 </html>

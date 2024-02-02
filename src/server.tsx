@@ -27,10 +27,12 @@ function makeLists() {
   const groceries = new List('Groceries');
   groceries.add('milk');
   groceries.add('eggs');
+  groceries.add('cheese');
 
   const trips = new List('Trips');
   trips.add('Bentonville, AR');
   trips.add('Glacier National Park');
+  trips.add('Yosemite National Park');
 
   const lists: Map<string, List> = new Map();
   lists.set(groceries.name, groceries);
@@ -50,7 +52,7 @@ function ListButton({name, oob = false}: ListButtonProps) {
     <button
       class={classes}
       hx-get={`/list/${name}`}
-      hx-target="#items"
+      hx-target=".sortable-list"
       id={name}
       {...attrs}
     >
@@ -84,12 +86,18 @@ app.get('/list/:name', (c: Context) => {
 
   const jsx = (
     <>
-      {list && list.items.map((item: Item) => <li>{item.text}</li>)}
+      {list &&
+        list.items.map((item: Item) => (
+          <li class="item" draggable>
+            ☰ {item.text}
+          </li>
+        ))}
       {previousButton}
       {thisButton}
     </>
   );
 
+  c.header('HX-Trigger', 'list-change');
   return c.html(jsx);
 });
 
