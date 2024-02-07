@@ -99,7 +99,8 @@ app.get('/list/:name', (c: Context) => {
       {list &&
         list.items.map((item: Item, index: number) => (
           <li class="item" draggable>
-            ☰ {item.text}
+            <div>☰</div>
+            <div>{item.text}</div>
             <button
               class="delete-btn"
               hx-delete={`/list/${name}/${index}`}
